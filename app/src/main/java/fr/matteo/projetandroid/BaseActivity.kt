@@ -1,5 +1,8 @@
 package fr.matteo.projetandroid
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -45,17 +48,30 @@ open class BaseActivity: AppCompatActivity() {
 
 
     fun showBack(){
-        //val imageViewBack = findViewById<ImageView>(R.id.imageViewBack)
-        //imageViewBack.visibility=View.VISIBLE
-        //imageViewBack.setOnClickListener {
-            //this.finish()
-        //}
+        val imageViewBack = findViewById<ImageView>(R.id.imageViewBack)
+        imageViewBack.visibility=View.VISIBLE
+        imageViewBack.setOnClickListener {
+            this.finish()
+        }
+    }
+
+    fun showProfil(){
+        val imageViewProfil = findViewById<ImageView>(R.id.imageViewProfil)
+        imageViewProfil.visibility = View.VISIBLE
+        imageViewProfil.setOnClickListener {
+            startActivity(Intent(this,CreateActivity::class.java))
+        }
     }
 
     fun setHeaderTitle(title:String?){
-        //if(title!=null) {
-            //val textViewNature = findViewById<TextView>(R.id.textViewTitle)
-            //textViewNature.text = title
-        //}
+        if(title!=null) {
+            val textViewNature = findViewById<TextView>(R.id.textViewTitle)
+            textViewNature.text = title
+        }
+    }
+
+    fun readSharedPref(key:String):String{
+        val sharedPreferences: SharedPreferences = getSharedPreferences("account", Context.MODE_PRIVATE)
+        return sharedPreferences.getString(key,"").toString()
     }
 }

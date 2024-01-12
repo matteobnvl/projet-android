@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">ProjetAndroid</string>
+
+    <string name="formulaireTxt">Remplir le formulaire manuellement</string>
+    <string name="QrCode">QrCode</string>
+
+    <string name="txtSave">Créer</string>
+    <string name="txtPrenom">Prénom</string>
+    <string name="txtNom">Nom</string>
+    <string name="txtEmail">Email</string>
+    <string name="txtAdress">Adresse</string>
+    <string name="txtCodePostal">CodePostal</string>
+    <string name="txtVille">Ville</string>
+    <string name="txtCarteFidelite">Carte de fidélité</string>
+
+    <string name="txtCreate">Création de compte</string>
+    <string name="txtCompte">Compte</string>
+
+    <string name="txtTitle">Header</string>
 </resources>
