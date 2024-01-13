@@ -5,28 +5,70 @@ import android.widget.TextView
 
 class TabBarActivity : BaseActivity() {
 
-    //val tab1Fragment= Tab1Fragment.newInstance("","")
+    val moviesFragment = MoviesFragment.newInstance("", "")
+    val mapFragment = MapFragment.newInstance("", "")
+    val cardFragment = CardFragment.newInstance("", "")
+    val shopFragment = ShopFragment.newInstance("", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_tabbar)
-        //showBack()
-        //setHeaderTitle(getString(R.string.txtTabbar))
+        setContentView(R.layout.activity_tabbar)
+        showProfil()
 
         //val tab1= findViewById<TextView>(R.id.textViewTab1)
+        val movies = findViewById<TextView>(R.id.textViewMovies)
+        val map = findViewById<TextView>(R.id.textViewMap)
+        val card = findViewById<TextView>(R.id.textViewCard)
+        val shop = findViewById<TextView>(R.id.textViewShop)
 
-        //showTab1()
+        showMovies()
 
-        //tab1.setOnClickListener {
-            //showTab1()
-        //}
+        movies.setOnClickListener {
+            showMovies()
+        }
+
+        map.setOnClickListener {
+            showMap()
+        }
+
+        card.setOnClickListener {
+            showCard()
+        }
+
+        shop.setOnClickListener {
+            showShop()
+        }
     }
 
-    //fun showTab1(){
-        //val frManager=supportFragmentManager
-        //val fragmentTra= frManager.beginTransaction()
-        //fragmentTra.addToBackStack("Tab1")
-        //fragmentTra.replace(R.id.layoutContent,tab1Fragment)
-        //fragmentTra.commit()
-    //}
+    private fun showMovies(){
+        val frManager=supportFragmentManager
+        val fragmentTra= frManager.beginTransaction()
+        fragmentTra.addToBackStack("Movies")
+        fragmentTra.replace(R.id.layoutContent,moviesFragment)
+        fragmentTra.commit()
+    }
+
+    private fun showMap(){
+        val frManager=supportFragmentManager
+        val fragmentTra= frManager.beginTransaction()
+        fragmentTra.addToBackStack("Map")
+        fragmentTra.replace(R.id.layoutContent,mapFragment)
+        fragmentTra.commit()
+    }
+
+    private fun showCard(){
+        val frManager=supportFragmentManager
+        val fragmentTra= frManager.beginTransaction()
+        fragmentTra.addToBackStack("Card")
+        fragmentTra.replace(R.id.layoutContent,cardFragment)
+        fragmentTra.commit()
+    }
+
+    private fun showShop(){
+        val frManager=supportFragmentManager
+        val fragmentTra= frManager.beginTransaction()
+        fragmentTra.addToBackStack("Shop")
+        fragmentTra.replace(R.id.layoutContent,shopFragment)
+        fragmentTra.commit()
+    }
 }

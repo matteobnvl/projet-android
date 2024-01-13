@@ -47,7 +47,8 @@ class CreateActivity : BaseActivity() {
             writeSharedPref("city",edCity.text.toString())
             writeSharedPref("cardRef",edCardRef.text.toString())
 
-            startActivity(Intent(this,MainActivity2::class.java))
+            startActivity(Intent(this,TabBarActivity::class.java))
+            this.finish()
         }
     }
 

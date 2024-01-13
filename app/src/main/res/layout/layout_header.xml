@@ -19,17 +19,17 @@
             android:text="@string/txtTitle"/>
         <ImageView
             android:id="@+id/imageViewBack"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_margin="10dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/keyboard_arrow_down_black_24dp"
+            android:src="@drawable/chevron_left_solid"
             />
         <ImageView
             android:id="@+id/imageViewProfil"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_margin="10dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/profile"
