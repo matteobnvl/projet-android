@@ -50,7 +50,7 @@ class ShopFragment : Fragment(), MoviesAdapter.OnMovieClickListener {
 
         recyclerViewMovies = view.findViewById(R.id.recyclerViewMoviesShop)
         recyclerViewMovies.layoutManager = LinearLayoutManager(requireContext())
-        moviesAdapter = MoviesAdapter(movies)
+        moviesAdapter = MoviesAdapter(movies, CellMovieType.SHOP)
         moviesAdapter.onMovieClickListener = this
         recyclerViewMovies.adapter = moviesAdapter
         requireActivity().runOnUiThread {

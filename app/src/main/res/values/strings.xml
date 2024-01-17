@@ -15,6 +15,7 @@
 
     <string name="txtCreate">Création de compte</string>
     <string name="txtCompte">Compte</string>
+    <string name="textSave">J\'enregistre les modifications</string>
 
     <string name="txtTitle">Header</string>
     <!-- TODO: Remove or change this placeholder text -->

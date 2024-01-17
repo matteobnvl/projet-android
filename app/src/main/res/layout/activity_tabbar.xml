@@ -26,8 +26,10 @@
             android:id="@+id/textViewMovies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/holo_green_light"
             style="@style/TextTabbar"
             android:text="@string/txtMovies"/>
+
         <TextView
             android:id="@+id/textViewMap"
             style="@style/TextTabbar"
@@ -45,7 +47,7 @@
         <TextView
             android:id="@+id/textViewShop"
             style="@style/TextTabbar"
-            android:background="@color/holo_orange_light"
+            android:background="@color/holo_red_light"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/txtShop"/>

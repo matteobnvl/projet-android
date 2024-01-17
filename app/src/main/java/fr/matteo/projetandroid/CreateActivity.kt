@@ -13,8 +13,10 @@ class CreateActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create)
 
+        val buttonSave=findViewById<Button>(R.id.buttonSave)
         if (readSharedPref("email") != "") {
             setHeaderTitle(getString(R.string.txtCompte))
+            buttonSave.text = getString(R.string.textSave)
             showBack()
         } else {
             setHeaderTitle(getString(R.string.txtCreate))
@@ -35,8 +37,6 @@ class CreateActivity : BaseActivity() {
         edZipcode.setText( readSharedPref("zipcode"))
         edCity.setText( readSharedPref("city"))
         edCardRef.setText( readSharedPref("cardRef"))
-
-        val buttonSave=findViewById<Button>(R.id.buttonSave)
 
         buttonSave.setOnClickListener {
             writeSharedPref("lastName",edLastName.text.toString())

@@ -21,8 +21,8 @@ class MovieActivity : BaseActivity() {
         val textViewRunTime = findViewById<TextView>(R.id.textViewRunTime)
         val textViewDescription = findViewById<TextView>(R.id.textViewDescription)
 
-        textViewRunTime.text = movie?.runTime.toString()
-        textViewDescription.text = movie?.description
+        textViewRunTime.text = "Durée : " + movie?.runTime.toString()
+        textViewDescription.text = "Description : " + movie?.description
         Glide.with(this).load(movie?.backdropUrl).into(imageView);
         showBack()
         buttonShop.setOnClickListener {

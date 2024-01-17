@@ -54,7 +54,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.OnMovieClickListener {
 
         recyclerViewMovies = view.findViewById(R.id.recyclerViewMovies)
         recyclerViewMovies.layoutManager = LinearLayoutManager(requireContext())
-        moviesAdapter = MoviesAdapter(movies)
+        moviesAdapter = MoviesAdapter(movies, CellMovieType.MOVIE)
         moviesAdapter.onMovieClickListener = this
         recyclerViewMovies.adapter = moviesAdapter
 

@@ -14,8 +14,8 @@ class TabBarActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tabbar)
         showProfil()
+        showLogoHeader()
 
-        //val tab1= findViewById<TextView>(R.id.textViewTab1)
         val movies = findViewById<TextView>(R.id.textViewMovies)
         val map = findViewById<TextView>(R.id.textViewMap)
         val card = findViewById<TextView>(R.id.textViewCard)

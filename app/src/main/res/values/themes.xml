@@ -8,10 +8,9 @@
     <style name="Theme.ProjetAndroid" parent="Base.Theme.ProjetAndroid" />
 
     <style name="ButtonHome" parent="Widget.AppCompat.Button">
-        <item name="android:layout_height">150dp</item>
-        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">200dp</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_marginTop">25dp</item>
     </style>
 
@@ -33,6 +32,7 @@
     <style name="TextViewStudent" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">28sp</item>
+        <item name="color">@color/black</item>
     </style>
 </resources>

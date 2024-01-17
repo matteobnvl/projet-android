@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/imageViewMovie"
-        android:layout_width="150dp"
-        android:layout_height="150dp" />
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
     <LinearLayout
         android:layout_gravity="center_vertical"
         android:padding="10dp"
@@ -35,8 +35,13 @@
 
         <Button
             android:id="@+id/buttonShopMovie"
-            style="@style/ButtonHome"
-            android:text="@string/addShop" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/addShop"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="100dp"
+            />
     </LinearLayout>
 
 </LinearLayout>
