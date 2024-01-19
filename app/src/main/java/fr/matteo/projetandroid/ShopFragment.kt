@@ -1,12 +1,15 @@
 package fr.matteo.projetandroid
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -40,13 +43,17 @@ class ShopFragment : Fragment(), MoviesAdapter.OnMovieClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_shop, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         movies = ArrayList(Shop.getShop())
+        val textViewShopVide = view.findViewById<TextView>(R.id.textViewShopVide)
+
+        if (movies.isEmpty()) {
+            textViewShopVide.visibility = View.VISIBLE
+        }
 
         recyclerViewMovies = view.findViewById(R.id.recyclerViewMoviesShop)
         recyclerViewMovies.layoutManager = LinearLayoutManager(requireContext())
@@ -60,7 +67,13 @@ class ShopFragment : Fragment(), MoviesAdapter.OnMovieClickListener {
 
     override fun onMovieClick(movie: Movies) {
         Shop.removeMovieFromShop(movie)
+        Toast.makeText(requireContext(), "Le film '${movie.title}' a été supprimé du panier", Toast.LENGTH_LONG).show()
         moviesAdapter.updateMoviesList(Shop.getShop())
+        val textViewShopVide = view?.findViewById<TextView>(R.id.textViewShopVide)
+
+        if (movies.isEmpty()) {
+            textViewShopVide?.visibility = View.VISIBLE
+        }
     }
 
     companion object {

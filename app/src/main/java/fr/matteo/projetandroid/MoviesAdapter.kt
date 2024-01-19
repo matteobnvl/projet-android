@@ -3,6 +3,7 @@ package fr.matteo.projetandroid
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ class MoviesAdapter (private val movies: ArrayList<Movies>, private val cellMovi
         val textViewTitleMovies = view.findViewById<TextView>(R.id.textViewTitleMovies)
         val imageViewMovies = view.findViewById<ImageView>(R.id.imageViewMovies)
         val textViewDescriptionShop = view.findViewById<TextView?>(R.id.textViewDescriptionShop)
+        val buttonShopDelete = view.findViewById<ImageView?>(R.id.buttonShopDelete)
         var currentMovie: Movies? = null
     }
 
@@ -50,6 +52,13 @@ class MoviesAdapter (private val movies: ArrayList<Movies>, private val cellMovi
         holder.textViewDescriptionShop?.text = movie.description
         Glide.with(holder.imageViewMovies.context).load(movie.graphicUrl).into(holder.imageViewMovies)
         holder.currentMovie = movie
+
+        holder.buttonShopDelete?.setOnClickListener {
+            val selectedMovie = holder.currentMovie
+            selectedMovie?.let {
+                onMovieClickListener?.onMovieClick(it)
+            }
+        }
 
         holder.textViewTitleMovies.setOnClickListener {
             val selectedMovie = holder.currentMovie

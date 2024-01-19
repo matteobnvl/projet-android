@@ -27,6 +27,8 @@
     <string name="txtMap">Salles</string>
 
     <string name="addShop">Ajouter au panier</string>
-    <string name="deleteShop">Supprimer du panier</string>
+    <string name="presentInShop">Film déjà dans votre panier</string>
+    <string name="addInShop">film ajouté au panier</string>
+    <string name="shopVide">Votre panier est vide</string>
 
 </resources>

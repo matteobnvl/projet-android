@@ -6,9 +6,11 @@
     tools:context=".CardFragment">
 
     <TextView
-        android:text="Test"
         android:id="@+id/textNameCard"
-        style="@style/TextViewStudent"/>
+        style="@style/TextViewStudent"
+        android:layout_marginTop="100dp"
+        android:text="Test"
+        android:textAlignment="center" />
 
     <ImageView
         android:id="@+id/imageViewQrCode"

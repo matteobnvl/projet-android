@@ -42,4 +42,16 @@ class Movies(
             return arrayOfNulls(size)
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
+
+        val movie = other as Movies
+        return id == movie.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
 }
