@@ -1,0 +1,104 @@
+package fr.matteo.projetandroid
+
+import android.content.Context
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import com.google.gson.Gson
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.WriterException
+import com.journeyapps.barcodescanner.BarcodeEncoder
+import java.util.HashMap
+
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [CardFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class CardFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_card, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val userData = getUserDataAsJsonString()
+        val barcodeEncoder = BarcodeEncoder()
+
+        val textNameCard = view.findViewById<TextView>(R.id.textNameCard)
+        textNameCard.text = readSharedPref("lastName") + " " + readSharedPref("firstName")
+
+        try {
+            val bitmap: Bitmap = barcodeEncoder.encodeBitmap(userData, BarcodeFormat.QR_CODE, 700, 700)
+            val imageViewQrCode = view.findViewById<ImageView>(R.id.imageViewQrCode)
+            imageViewQrCode.setImageBitmap(bitmap)
+        } catch (e: WriterException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun getUserDataAsJsonString(): String {
+        val userData = HashMap<String, String>()
+        userData["firstName"] = readSharedPref("firstName")
+        userData["lastName"] = readSharedPref("lastName")
+        userData["email"] = readSharedPref("email")
+        userData["address"] = readSharedPref("address")
+        userData["zipcode"] = readSharedPref("zipcode")
+        userData["city"] = readSharedPref("city")
+        userData["cardRef"] = readSharedPref("cardRef")
+
+        return Gson().toJson(userData)
+    }
+
+    fun readSharedPref(key:String):String{
+        val sharedPreferences: SharedPreferences = requireActivity().getSharedPreferences("account", Context.MODE_PRIVATE)
+        return sharedPreferences.getString(key,"").toString()
+    }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment CardFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            CardFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+}

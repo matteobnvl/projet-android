@@ -15,6 +15,20 @@
 
     <string name="txtCreate">Création de compte</string>
     <string name="txtCompte">Compte</string>
+    <string name="textSave">J\'enregistre les modifications</string>
 
     <string name="txtTitle">Header</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="txtMovies">Films</string>
+    <string name="txtShop">Panier</string>
+    <string name="txtCard">Carte</string>
+    <string name="txtMap">Salles</string>
+
+    <string name="addShop">Ajouter au panier</string>
+    <string name="presentInShop">Film déjà dans votre panier</string>
+    <string name="addInShop">film ajouté au panier</string>
+    <string name="shopVide">Votre panier est vide</string>
+
 </resources>

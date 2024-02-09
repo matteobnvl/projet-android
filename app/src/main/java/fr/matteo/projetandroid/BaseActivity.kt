@@ -63,9 +63,15 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
+    fun showLogoHeader(){
+        val imageViewLogo = findViewById<ImageView>(R.id.imageViewLogoHeader)
+        imageViewLogo.visibility = View.VISIBLE
+    }
+
     fun setHeaderTitle(title:String?){
         if(title!=null) {
             val textViewNature = findViewById<TextView>(R.id.textViewTitle)
+            textViewNature.visibility = View.VISIBLE
             textViewNature.text = title
         }
     }

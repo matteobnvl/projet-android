@@ -14,7 +14,7 @@ class MainActivity : BaseActivity() {
 
         val buttonLogin=findViewById<Button>(R.id.qrCode)
         buttonLogin.setOnClickListener {
-            startActivity(Intent(this,CreateActivity::class.java))
+            startActivity(Intent(this,ScanQrCodeActivity::class.java))
         }
 
         val buttonStudents=findViewById<Button>(R.id.buttonCreate)

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+    <ImageView
+        android:id="@+id/imageViewMovies"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textViewTitleMovies"
+            style="@style/TextViewStudent"
+            android:maxLines="1"
+            android:text="Nom du film"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewDescriptionShop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="Description : "
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/buttonShopDelete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:background="@color/holo_red_dark"
+            android:padding="5dp"
+            android:radius="900dp"
+            android:src="@drawable/trash_solid" />
+    </LinearLayout>
+
+</LinearLayout>

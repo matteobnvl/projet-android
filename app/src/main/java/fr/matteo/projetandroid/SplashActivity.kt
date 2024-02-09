@@ -18,7 +18,7 @@ class SplashActivity : BaseActivity() {
             },2500)
         } else {
             Handler(Looper.getMainLooper()).postDelayed(Runnable {
-                startActivity(Intent(this,MainActivity2::class.java))
+                startActivity(Intent(this,TabBarActivity::class.java))
                 finish()
             },2500)
         }
