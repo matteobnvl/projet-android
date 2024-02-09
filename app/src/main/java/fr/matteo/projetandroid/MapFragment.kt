@@ -41,9 +41,7 @@ class MapFragment : Fragment() {
 
     private val callback = OnMapReadyCallback { googleMap ->
         fetchData()
-        Log.d("MATTEO", "here")
         for (hall in halls) {
-            Log.d("Response", hall.toString())
             val city = MarkerOptions()
             val cityLatLng = LatLng(hall.latitude, hall.longitude)
             city.title("Salle " + hall.name)
@@ -108,7 +106,6 @@ class MapFragment : Fragment() {
                 val data = response.body?.string()
                 if (data != null) {
                     val hallsJson = JSONObject(data)
-                    Log.d("toto", hallsJson.toString())
                     val jsArrayHalls = hallsJson.getJSONArray("salles")
 
                     for (i in 0 until jsArrayHalls.length()) {

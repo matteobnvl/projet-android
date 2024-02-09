@@ -1,7 +1,9 @@
 package fr.matteo.projetandroid
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 class TabBarActivity : BaseActivity() {
 
@@ -16,10 +18,10 @@ class TabBarActivity : BaseActivity() {
         showProfil()
         showLogoHeader()
 
-        val movies = findViewById<TextView>(R.id.textViewMovies)
-        val map = findViewById<TextView>(R.id.textViewMap)
-        val card = findViewById<TextView>(R.id.textViewCard)
-        val shop = findViewById<TextView>(R.id.textViewShop)
+        val movies = findViewById<ImageView>(R.id.imageViewTabMovies)
+        val map = findViewById<ImageView>(R.id.imageViewTabMap)
+        val card = findViewById<ImageView>(R.id.imageViewTabCard)
+        val shop = findViewById<ImageView>(R.id.imageViewTabShop)
 
         showMovies()
 
@@ -46,6 +48,11 @@ class TabBarActivity : BaseActivity() {
         fragmentTra.addToBackStack("Movies")
         fragmentTra.replace(R.id.layoutContent,moviesFragment)
         fragmentTra.commit()
+        Glide.with(this).load(R.drawable.videocam).into(findViewById<ImageView>(R.id.imageViewTabMovies));
+
+        Glide.with(this).load(R.drawable.storefront_outline).into(findViewById<ImageView>(R.id.imageViewTabMap));
+        Glide.with(this).load(R.drawable.qr_code_outline).into(findViewById<ImageView>(R.id.imageViewTabCard));
+        Glide.with(this).load(R.drawable.cart_outline).into(findViewById<ImageView>(R.id.imageViewTabShop));
     }
 
     private fun showMap(){
@@ -54,6 +61,12 @@ class TabBarActivity : BaseActivity() {
         fragmentTra.addToBackStack("Map")
         fragmentTra.replace(R.id.layoutContent,mapFragment)
         fragmentTra.commit()
+
+        Glide.with(this).load(R.drawable.storefront).into(findViewById<ImageView>(R.id.imageViewTabMap));
+
+        Glide.with(this).load(R.drawable.videocam_outline).into(findViewById<ImageView>(R.id.imageViewTabMovies))
+        Glide.with(this).load(R.drawable.qr_code_outline).into(findViewById<ImageView>(R.id.imageViewTabCard));
+        Glide.with(this).load(R.drawable.cart_outline).into(findViewById<ImageView>(R.id.imageViewTabShop));
     }
 
     private fun showCard(){
@@ -62,6 +75,12 @@ class TabBarActivity : BaseActivity() {
         fragmentTra.addToBackStack("Card")
         fragmentTra.replace(R.id.layoutContent,cardFragment)
         fragmentTra.commit()
+
+        Glide.with(this).load(R.drawable.qr_code).into(findViewById<ImageView>(R.id.imageViewTabCard));
+
+        Glide.with(this).load(R.drawable.videocam_outline).into(findViewById<ImageView>(R.id.imageViewTabMovies))
+        Glide.with(this).load(R.drawable.storefront_outline).into(findViewById<ImageView>(R.id.imageViewTabMap));
+        Glide.with(this).load(R.drawable.cart_outline).into(findViewById<ImageView>(R.id.imageViewTabShop));
     }
 
     private fun showShop(){
@@ -70,5 +89,11 @@ class TabBarActivity : BaseActivity() {
         fragmentTra.addToBackStack("Shop")
         fragmentTra.replace(R.id.layoutContent,shopFragment)
         fragmentTra.commit()
+
+        Glide.with(this).load(R.drawable.cart).into(findViewById<ImageView>(R.id.imageViewTabShop));
+
+        Glide.with(this).load(R.drawable.videocam_outline).into(findViewById<ImageView>(R.id.imageViewTabMovies))
+        Glide.with(this).load(R.drawable.storefront_outline).into(findViewById<ImageView>(R.id.imageViewTabMap));
+        Glide.with(this).load(R.drawable.qr_code_outline).into(findViewById<ImageView>(R.id.imageViewTabCard));
     }
 }
