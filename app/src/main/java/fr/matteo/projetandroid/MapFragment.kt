@@ -1,17 +1,20 @@
 package fr.matteo.projetandroid
 
-import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.content.Intent
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import okhttp3.CacheControl
@@ -33,37 +36,98 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MapFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MapFragment : Fragment() {
-    lateinit var googleMap: GoogleMap
-    private var param1: String? = null
-    private var param2: String? = null
-    private val halls = arrayListOf<Halls>()
 
-    private val callback = OnMapReadyCallback { googleMap ->
-        fetchData()
-        for (hall in halls) {
-            val city = MarkerOptions()
-            val cityLatLng = LatLng(hall.latitude, hall.longitude)
-            city.title("Salle " + hall.name)
-            city.position(cityLatLng)
-            val marker = googleMap.addMarker(city)
-            if (marker != null) {
-                marker.tag = hall
+class MapFragment : Fragment() {
+
+    private val cinemas = ArrayList<Halls>()
+
+    private fun fetchCinemas() {
+        val okHttpClient = OkHttpClient()
+        val request = Request.Builder()
+            .url("https://ugarit-online.000webhostapp.com/epsi/films/salles.json")
+            .build()
+
+        okHttpClient.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
             }
 
-        }
+            override fun onResponse(call: Call, response: Response) {
+                val data = response.body?.string()
+                if (data != null) {
+                    Log.d("MapFragment", "Response from URL: $data") // Log the response
+                    val jsonCinemas = JSONObject(data)
+                    val jsArrayCinemas = jsonCinemas.getJSONArray("salles")
+                    for (i in 0 until jsArrayCinemas.length()) {
+                        val cinemaJson = jsArrayCinemas.getJSONObject(i)
+                        val cinema = Halls(
+                            cinemaJson.getInt("id"),
+                            cinemaJson.getString("name"),
+                            cinemaJson.getString("address1"),
+                            cinemaJson.optString("address2"),
+                            cinemaJson.getString("city"),
+                            cinemaJson.getDouble("latitude"),
+                            cinemaJson.getDouble("longitude"),
+                            cinemaJson.optString("parkingInfo"),
+                            cinemaJson.optString("description"),
+                            cinemaJson.optString("publicTransport")
+                        )
+                        cinemas.add(cinema)
+                    }
+                } else {
+                    Log.e("MapFragment", "Empty response body")
+                }
 
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(48.854885, 2.338646), 5f))
-
-        googleMap.setOnInfoWindowClickListener { marker ->
-            val hall = marker.tag as? Halls
-            val newIntent = Intent(requireContext(), HallActivity::class.java)
-            newIntent.putExtra("hall", hall)
-            startActivity(newIntent)
-        }
-        this.googleMap = googleMap
-
+                activity?.runOnUiThread {
+                    addMarkersToMap()
+                }
+            }
+        })
     }
+    private fun addMarkersToMap() {
+        val markerWidth = 100
+        val originalMarkerIcon = BitmapFactory.decodeResource(resources, R.drawable.movieticket)
+        val resizedMarkerIcon =
+            Bitmap.createScaledBitmap(originalMarkerIcon, markerWidth, markerWidth, false)
+        val markerIcon = BitmapDescriptorFactory.fromBitmap(resizedMarkerIcon)
+        googleMap.clear()
+        cinemas.forEach { cinema ->
+            val markerOptions = MarkerOptions()
+                .position(LatLng(cinema.latitude.toDouble(), cinema.longitude.toDouble()))
+                .title(cinema.name)
+                .icon(markerIcon)
+            googleMap.addMarker(markerOptions)?.tag = cinema
+        }
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(48.854885, 2.338646), 5f))
+    }
+
+
+    lateinit var googleMap: GoogleMap
+
+    private val callback = OnMapReadyCallback { googleMap ->
+        this.googleMap = googleMap
+        fetchCinemas()
+        googleMap.setOnInfoWindowClickListener { marker ->
+            val cinema = marker.tag as Halls
+            cinema?.let {
+                val intent = Intent(context, HallActivity::class.java)
+                intent.putExtra("title", cinema.name)
+                intent.putExtra("adresse1", cinema.address1)
+                intent.putExtra("adresse2", cinema.address2)
+                intent.putExtra("ville", cinema.city)
+                intent.putExtra("description", cinema.description)
+                intent.putExtra("parkingInfo", cinema.parkingInfo)
+                intent.putExtra("transport", cinema.PublicTransport)
+
+                startActivity(intent)
+            }
+            // Show detailed information about the cinema here
+            // Example: Create a dialog or bottom sheet to display cinema details
+        }
+    }
+
+    private var param1: String? = null
+    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,52 +147,11 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchData()
+        (activity as TabBarActivity).setHeaderTitle(getString(R.string.txtMap))
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
-
-    private fun fetchData() {
-        val okHttpClient: OkHttpClient = OkHttpClient.Builder().build()
-        val mRequestUrl = "https://ugarit-online.000webhostapp.com/epsi/films/salles.json"
-        val request = Request.Builder()
-            .url(mRequestUrl)
-            .get()
-            .cacheControl(CacheControl.FORCE_NETWORK)
-            .build()
-
-        okHttpClient.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val data = response.body?.string()
-                if (data != null) {
-                    val hallsJson = JSONObject(data)
-                    val jsArrayHalls = hallsJson.getJSONArray("salles")
-
-                    for (i in 0 until jsArrayHalls.length()) {
-                        val js = jsArrayHalls.getJSONObject(i)
-                        val hall = Halls(
-                            js.optInt("id", 0),
-                            js.optString("name", "name"),
-                            js.optString("address1", "address1"),
-                            js.optString("address2", "address2"),
-                            js.optString("city", "city"),
-                            js.optDouble("latitude", 0.0),
-                            js.optDouble("longitude", 0.0),
-                            js.optString("parkingInfo", "parkingInfo"),
-                            js.optString("description", "description"),
-                            js.optString("publicTransport", "publicTransport")
-                        )
-                        halls.add(hall)
-                    }
-                }
-            }
-        })
-    }
-
+    // code du prof juste en dessous
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -136,7 +159,7 @@ class MapFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment MapFragment.
+         * @return A new instance of fragment MapFragement.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
