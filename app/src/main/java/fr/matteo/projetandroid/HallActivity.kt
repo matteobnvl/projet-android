@@ -19,7 +19,6 @@ class HallActivity : BaseActivity() {
         val parkingInfo= intent.extras!!.getString("parkingInfo", "");
         val transport= intent.extras!!.getString("transport", "");
 
-        //setHeaderTitle(title)
         showBack()
 
         val textViewTitle = findViewById<TextView>(R.id.textViewTitle)

@@ -121,8 +121,6 @@ class MapFragment : Fragment() {
 
                 startActivity(intent)
             }
-            // Show detailed information about the cinema here
-            // Example: Create a dialog or bottom sheet to display cinema details
         }
     }
 
@@ -141,17 +139,14 @@ class MapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as TabBarActivity).setHeaderTitle(getString(R.string.txtMap))
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
-    // code du prof juste en dessous
     companion object {
         /**
          * Use this factory method to create a new instance of
