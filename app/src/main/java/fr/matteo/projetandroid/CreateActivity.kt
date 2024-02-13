@@ -63,7 +63,9 @@ class CreateActivity : BaseActivity() {
             writeSharedPref("city",edCity.text.toString())
             writeSharedPref("cardRef",edCardRef.text.toString())
 
-            startActivity(Intent(this,TabBarActivity::class.java))
+            val intent = Intent(this, TabBarActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
             this.finish()
         }
     }
