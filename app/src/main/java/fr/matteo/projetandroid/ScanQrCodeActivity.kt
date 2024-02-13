@@ -11,7 +11,6 @@ import com.journeyapps.barcodescanner.ScanOptions
 
 class ScanQrCodeActivity : AppCompatActivity() {
 
-    // Utilisez ActivityResultLauncher pour gérer le résultat du scan
     private val barcodeLauncher: ActivityResultLauncher<ScanOptions> = registerForActivityResult(
         ScanContract()
     ) { result ->
@@ -33,15 +32,13 @@ class ScanQrCodeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_qr_code)
 
-        // Configurer les options de scan
         val options = ScanOptions()
         options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
         options.setPrompt("Scan a QR code")
-        options.setCameraId(0)  // Utiliser la caméra arrière
+        options.setCameraId(0)
         options.setBeepEnabled(false)
         options.setBarcodeImageEnabled(true)
 
-        // Lancer le scanner
         barcodeLauncher.launch(options)
     }
 }
