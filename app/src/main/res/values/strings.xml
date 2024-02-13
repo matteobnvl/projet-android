@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjetAndroid</string>
+    <string name="app_name">Mon ciné</string>
 
     <string name="formulaireTxt">Remplir le formulaire manuellement</string>
     <string name="QrCode">QrCode</string>
