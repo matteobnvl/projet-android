@@ -93,7 +93,7 @@ class MapFragment : Fragment() {
         googleMap.clear()
         cinemas.forEach { cinema ->
             val markerOptions = MarkerOptions()
-                .position(LatLng(cinema.latitude.toDouble(), cinema.longitude.toDouble()))
+                .position(LatLng(cinema.latitude, cinema.longitude))
                 .title(cinema.name)
                 .icon(markerIcon)
             googleMap.addMarker(markerOptions)?.tag = cinema

@@ -28,12 +28,16 @@ class HallActivity : BaseActivity() {
         val textViewParkingInfo = findViewById<TextView>(R.id.textViewParkingInfo)
         val textViewTransport = findViewById<TextView>(R.id.textViewTransport)
 
+        val descritpionText = getString(R.string.description)
+        val parkingText = getString(R.string.parking)
+        val transportText = getString(R.string.transport)
+
         textViewTitle.text = title
         textViewAddress.text = adresse1 +" "+ adresse2
         textViewCity.text = ville
-        textViewDescription.text ="Description : "+ description
-        textViewParkingInfo.text ="Parking info : "+ parkingInfo
-        textViewTransport.text ="Transport : "+ transport
+        textViewDescription.text =descritpionText + description
+        textViewParkingInfo.text =parkingText + parkingInfo
+        textViewTransport.text =transportText + transport
 
         textViewTitle.visibility = View.VISIBLE
 

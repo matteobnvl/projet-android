@@ -9,7 +9,6 @@
         android:id="@+id/textNameCard"
         style="@style/TextViewStudent"
         android:layout_marginTop="100dp"
-        android:text="Test"
         android:textAlignment="center" />
 
     <ImageView

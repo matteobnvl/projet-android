@@ -24,12 +24,10 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/textViewRunTime"
-            android:text="Test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/textViewDescription"
-            android:text="Test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

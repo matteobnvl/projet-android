@@ -31,4 +31,11 @@
     <string name="addInShop">film ajouté au panier</string>
     <string name="shopVide">Votre panier est vide</string>
 
+    <string name="description">Description : </string>
+    <string name="parking">Parking info : </string>
+    <string name="transport">Transport : </string>
+
+    <string name="movieName">nom du film : </string>
+
+
 </resources>
